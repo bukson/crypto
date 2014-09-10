@@ -60,14 +60,11 @@ def crackKeyLen(text):
 		
 		for i in xrange(len(blocks) - 1):
 			score += hammingDist(blocks[i], blocks[i+1])
-			# score += binDist(blocks[i], blocks[i+1])
 		return - score / ((len(blocks) - 1) * keylen) 
-	# print MAXKEYLEN
 	scores = []
 	keyRange = xrange(2, MAXKEYLEN + 1)
 	for keylen in keyRange:
 		scores.append((score(keylen), keylen))
-	# for score,keylen in sorted(scores, reverse=1): print score,keylen
 	return [x[1] for x in sorted(scores, reverse=1)][:top]
 
 def crack(text, scorer=ts.NgramDict('english_quadgrams.txt')):
